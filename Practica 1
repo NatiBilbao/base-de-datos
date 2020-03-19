@@ -1,0 +1,55 @@
+===============================
+
+Nombre: Bilbao Cano Natalia 
+
+Codigo: 40987
+
+Practica 1
+
+================================
+
+Ejercicios Propuestos
+
+=======================================================================
+
+1. Mostrar el usuario y nombre de los empleados.
+
+2. Mostrar el atributo email como correo, de los usuarios activos.
+
+3. Contar las publicaciones que hizo 'Eric G. Coronel Castillo'.
+
+4. Sumar los precios de las ventas del empleado EMILIO.
+
+=======================================================================
+
+SELECT nombre, apellido FROM empleado;
+
+SELECT usuario FROM usuario;
+
+=======================================================================
+
+select email as correo, idempleado
+
+from empleado
+
+SELECT usuario, idempleado,activo 
+
+FROM usuario
+
+where activo = 1
+
+=======================================================================
+
+select count(*)
+
+  from publicacion
+  
+  where autor ='Eric G. Coronel Castillo';
+  
+=======================================================================
+
+select sum(precio)
+      
+      from venta
+      
+      where idempleado = 1;
