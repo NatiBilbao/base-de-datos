@@ -1,0 +1,65 @@
+===============================
+
+Nombre: Bilbao Cano Natalia 
+
+Codigo: 40987
+
+Practica 2
+
+================================
+
+Ejercicios Propuestos
+
+==============================================================================================================================
+
+1. Encontrar los nombres de los ingredientes suministrados por Veggies_R_Us.
+
+
+2. Encontrar el nombre de todos los ingredientes suministrados por Veggies_R_Us o Spring Water Supply.
+
+
+3. Encuentre el precio unitario promedio para todos los artículos proporcionados por Veggies_R_Us.
+
+
+4. Encuentre todos los ingredientes con un inventario menor al promedio de los ingredientes
+
+
+5. Encuentre las compañías que fueron referidas por Veggies_R_Us y proporcione un ingrediente en el grupo de alimentos lácteos.
+
+===========================================================================================================================================
+
+select ingredients.name from ingredients inner join vendors on ingredients.vendorid=vendors.vendorid && vendors.companyname='Veggies_R_Us';
+
+==========================================================================================================================================================================================
+
+select ingredients.name from ingredients inner join vendors on ingredients.vendorid=vendors.vendorid && (vendors.companyname='Veggies_R_Us' || vendors.companyname='Spring Water Supply');
+
+=====================================================================================================================================================
+
+select avg(ingredients.unitprice) from ingredients inner join vendors on ingredients.vendorid=vendors.vendorid && vendors.companyname='Veggies_R_Us';
+
+=====================================================================================================================================================
+
+select avg(items.price) from items 
+
+inner join madewith on items.itemid=madewith.itemid 
+
+inner join ingredients on madewith.ingredientid=ingredients.ingredientid
+
+inner join vendors on vendors.vendorid=ingredients.vendorid && vendors.companyname='Veggies_R_Us';
+
+===================================================================================================
+
+select name,inventory from ingredients
+
+where inventory<(select avg(ingredients.inventory) from ingredients);
+
+========================================================================================================================
+
+select companyname from vendors where vendors.referredby=(select vendorid from vendors where companyname='Veggies_R_Us') 
+
+&& vendorid in (
+
+select vendors.vendorid from vendors 
+
+inner join ingredients on vendors.vendorid=ingredients.vendorid and ingredients.foodgroup='Milk');
